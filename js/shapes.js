@@ -18,16 +18,27 @@ window.onload = function() {
     // there are six event listeners being added for the staff solutions. you'll have an
     // equivalent set of six event listeners for your solutions. the first one is done for you.
 
-    this.document.getElementById("hello").onclick = sayHello;
+      document.getElementById("hello").onclick = sayHello;
 }
 
 /*
  * Exercise 1.
  */
 
-const sayHello = function() {
-    const hello = prompt()
-};
+ const sayHello = function() {
+   let canvas = document.getElementById('student-canvas-1');
+  let ctx1 = canvas.getContext('2d');
+   ctx1.clearRect(0, 0, 1024, 128);
+   let text = prompt("Message: ");
+
+     while (text.length > 50){
+          alert("Your message is too long. Keep it under 50 characters.");
+          text = prompt("Message: ");
+        }
+
+     ctx1.font = '48px sans-serif';
+     ctx1.strokeText(text, 30, 70, 994);
+   };
 
 /*
  * Exercise 2.
