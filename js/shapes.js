@@ -22,6 +22,8 @@ window.onload = function() {
       document.getElementById("rectangle").onclick = drawRectangle;
       document.getElementById("colored_rectangle").onclick = drawColoredRectangle;
       document.getElementById("triangle").onclick = drawTriangle;
+      document.getElementById("smile").onclick = drawFace;
+      document.getElementById("pyramid").onclick = drawPyramid;
 }
 
 /*
@@ -175,14 +177,91 @@ const drawRectangle = function() {
  * Exercise 5.
  */
 
-const drawFace = function() {
-    // write your exercise 4 code here
-};
+  const drawFace = function() {
+    const canvas = document.getElementById('student-canvas-5');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    do {
+      var radius = (prompt("Radius: "))
+      if (radius == null) {
+        break;
+      }
+      if (radius < 32) {
+        alert("Your radius must be at least 32.")
+      }
+      if (isNaN(radius)) {
+        alert("Your radius is not a number.")
+      }
+      if (radius > 256) {
+        alert("Your smiley face won't fit on the canvas.")
+      }
+    } while (radius > 256 || isNaN(radius) || radius < 32)
+
+    var radius_eyes = 0.15 * radius
+    var radius_mouth = 0.7 * radius
+
+    ctx.beginPath();
+    ctx.arc(512, 256, radius, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(512, 256, radius_mouth, 0, Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(512 - 0.4 * radius, 256 - 0.4 * radius, radius_eyes, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(512 + 0.4 * radius, 256 - 0.4* radius, radius_eyes, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.closePath();
+  };
 
 /*
  * Exercise 6 (extra credit).
  */
 
 const drawPyramid = function() {
-    // write your exercise 5 code here
+const canvas = document.getElementById('student-canvas-6');
+const ctx = canvas.getContext('2d');
+var distance = 0
+var height_1 = 0
+var distance_modifier = 0
+var height_modifier = 0
+var counter = 5
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+do {
+  var side = (prompt("Side: "))
+  if (side == null) {
+    break;
+  }
+  if (side < 1) {
+    alert("Your block size must be at least 1.")
+  }
+  if (side >= 101) {
+    alert("Your pyramid won't fit on the canvas")
+  }
+  if (isNaN(side)) {
+    alert("Your block size is not a number.")
+  }
+} while (isNaN(side) || side >= 101 || side < 1)
+
+for (i = 5; i > 0; i--) {
+  counter = i
+  while(counter >= 1) {
+    ctx.beginPath();
+    ctx.rect(10 + Number(distance), (502 - side) - Number(height_1), Number(side), Number(side));
+    ctx.stroke();
+    ctx.closePath();
+    distance = Number(distance) + Number(side)
+    counter--
+  }
+  distance_modifier++
+  distance = distance_modifier * (1/2 * side)
+  height_modifier++
+  height_1 = height_modifier * side
+}
 };
